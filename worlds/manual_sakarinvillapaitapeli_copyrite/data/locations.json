@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Aloita"
+  },
+  {
+    "name": "Ei",
+    "requires": "|Ei|"
+  },
+  {
+    "name": "Juu",
+    "victory": true,
+    "requires": "|Juu|"
+  }
+]
