@@ -21,12 +21,22 @@
             }
         }
     },
-    "_user": {
+    "user": {
+        "goal_arcade_final_round_track_clears":{
+            "type": "Range",
+            "description": [
+                "How many final round Arcade tracks must be cleared to goal."
+            ],
+            "range_start": 1,
+            "default": 1,
+            "range_end": 6,
+            "group": "Goal"
+        },
         "_commented_out_option":{
             "type": "Toggle",
             "default": true
         },
-        "Example_Toggle":{
+        "_Example_Toggle":{
             "description": [
                 "This is a Toggle",
                 "A simple boolean, aka True or False set the initial value with \"default\""
@@ -35,7 +45,7 @@
             "default": false,
             "group": "Example Options"
         },
-        "Example_Choice":{
+        "_Example_Choice":{
             "type": "Choice",
             "description": [
                 "This is a Choice",
@@ -51,22 +61,8 @@
             "allow_custom_value": false,
             "group": "Example Options"
         },
-        "Example_Range":{
-            "type": "Range",
-            "description": [
-                "This is a Range",
-                "Allow the player to specify a value between 'start' and 'end'",
-                "if you include a \"values\" you can define the label for certain values",
-                "Currently the only use for Range in Manual outside of hooks is 'filler_trap'"
-            ],
-            "range_start": 0,
-            "default": 1,
-            "range_end": 10,
-            "values": {"example": 2},
-            "group": "Example Options"
-        },
 
-        "DLC_enabled":{
+        "_DLC_enabled":{
             "display_name": "DLC Enabled",
             "description": "Is the Dlc enabled?",
             "type": "Toggle",

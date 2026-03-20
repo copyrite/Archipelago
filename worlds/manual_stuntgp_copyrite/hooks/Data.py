@@ -40,7 +40,7 @@ def after_load_location_file(location_table: list) -> list:
         "name": "Goal",
         "category": "Goal",
         "victory": True,
-        "requires": "|Clear:1|",
+        "requires": "{OptionCount(Clear, goal_arcade_final_round_track_clears)}",
         "region": "Arcade",
     })
     for track in TRACKS.values():
@@ -65,6 +65,11 @@ def after_load_location_file(location_table: list) -> list:
             "region": track["name"],
         })
     return location_table
+
+# called after the events.json file has been loaded, before any processing has occurred
+# If you need access to the events after processing, you should use the hooks in World.py
+def after_load_event_file(event_table: list) -> list:
+    return event_table
 
 # called after the locations.json file has been loaded, before any location loading or processing has occurred
 # if you need access to the locations after processing to add ids, etc., you should use the hooks in World.py
