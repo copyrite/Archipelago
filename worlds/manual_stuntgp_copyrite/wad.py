@@ -105,6 +105,11 @@ def write_wad(path: pathlib.Path, files: dict[bytes, bytes]):
         file.write(hash_bytes)
         file.write(file_list)
 
+def csv_to_lists(csv: bytes):
+    return [row.split(b",") for row in csv.split(b"\r\n")]
+
+def lists_to_csv(lists: list[list[bytes]]):
+    return b"\r\n".join(b",".join(row) for row in lists)
 
 
 if __name__ == "__main__":

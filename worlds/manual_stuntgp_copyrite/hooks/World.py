@@ -1,11 +1,16 @@
 from functools import partial
+from hashlib import file_digest
+from pathlib import Path
+from shutil import copyfile
 
-from ..StuntGP import CARS, TRACKS
+from ..StuntGP import CARS, TRACKS, SETUP_MD5
+from ..wad import read_wad, write_wad, csv_to_lists, lists_to_csv
 
 # Object classes from AP core, to represent an entire MultiWorld and this individual World that's part of it
 from typing import Any
 from worlds.AutoWorld import World
 from BaseClasses import MultiWorld, CollectionState, Item, Region
+import settings
 
 # Object classes from Manual -- extending AP core -- representing items and locations that are used in generation
 from ..Items import ManualItem
@@ -69,8 +74,6 @@ def after_create_regions(world: World, multiworld: MultiWorld, player: int):
 
     arcade_tracks = set(sum(world.arcade_grid, []))
     world.unused_tracks = set(all_tracks) - arcade_tracks
-
-    print(world.arcade_grid)
 
     # Remove locations from unused tracks
     for track in world.unused_tracks:
@@ -300,4 +303,52 @@ def hook_interpret_slot_data(world: World, player: int, slot_data: dict[str, Any
         Called when Universal Tracker wants to perform a fake generation
         Use this if you want to use or modify the slot_data for passed into re_gen_passthrough
     """
+    world.arcade_grid = slot_data["arcade_grid"]
+
+    host_sgp_group = settings.get_settings()["manual_stuntgp_copyrite_options"]
+    try:
+        sgp_path = host_sgp_group["sgp_path"]
+    except KeyError:
+        raise ValueError("host.yaml setting 'sgp_path' not found under the group 'manual_stuntgp_copyrite_options'. Add it with the StuntGP installation directory to enable patching your 'setup.wad'.")
+
+    def select_wad(sgp_path: str):
+        active_path = Path(sgp_path) / "wads/setup.wad"
+        backup_path = Path(sgp_path) / "wads/setup.wad.bak"
+
+        if backup_path.exists():
+            with open(backup_path, "rb") as file:
+                if file_digest(file, "md5").hexdigest() == SETUP_MD5:
+                    logging.info(f"Found {backup_path} with correct MD5")
+                    return backup_path
+        elif active_path.exists():
+            with open(active_path, "rb") as file:
+                if file_digest(file, "md5").hexdigest() == SETUP_MD5:
+                    logging.info(f"Found {active_path} with correct MD5")
+                    copyfile(active_path, backup_path)
+                    logging.info(f"Backed up {active_path} to {backup_path}")
+                    return active_path
+        raise ValueError("No suitable 'wads/setup.wad' or 'wads/setup.wad.bak' found in StuntGP installation.")
+
+    setup_path = select_wad(sgp_path)
+    setup = read_wad(setup_path)
+    arcade = setup[b"setup\\arcade.csv"]
+    tracks = setup[b"setup\\tracks.csv"]
+    table = csv_to_lists(arcade)
+
+    # Update Arcade grid
+    arcade_grid_index = table.index([b'', b'Laps', b'Qualify Position', b'Track'])
+    for index, track in zip(range(arcade_grid_index+1, arcade_grid_index+1+18), sum(world.arcade_grid[::-1], [])):
+        track_id = next(key for key, value in TRACKS.items() if value["name"] == track)
+        table[index][3] = bytes(str(track_id), "ascii")
+    setup[b"setup\\arcade.csv"] = lists_to_csv(table)
+
+    # Roll random track tilesets
+    table = csv_to_lists(tracks)
+    for row in table[1:len(TRACKS)+1]:
+        for col in range(2,7):
+            row[col] = bytes(str(world.random.randint(0, 6)), "ascii")
+    setup[b"setup\\tracks.csv"] = lists_to_csv(table)
+    write_wad(setup_path, setup)
+    logging.info(f"Patched {setup_path}")
+
     return slot_data

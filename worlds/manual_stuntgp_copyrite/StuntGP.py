@@ -46,3 +46,4 @@ CARS = {
     19: {"name": "Formula 17", "group": "Team Specials"},
     20: {"name": "Team Machine", "group": "Team Specials"},
 }
+SETUP_MD5 = "d3c9afeda52418470db56c2ed2d90a35"
