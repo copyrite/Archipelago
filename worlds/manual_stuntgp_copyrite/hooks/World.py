@@ -22,7 +22,7 @@ from ..Locations import ManualLocation
 from ..Data import game_table, item_table, location_table, region_table
 
 # These helper methods allow you to determine if an option has been set, or what its value is, for any player in the multiworld
-from ..Helpers import is_option_enabled, get_option_value, format_state_prog_items_key, ProgItemsCat
+from ..Helpers import is_option_enabled, get_option_value, format_state_prog_items_key, ProgItemsCat, remove_specific_item
 
 # calling logging.info("message") anywhere below in this file will output the message to both console and log file
 import logging
@@ -184,7 +184,7 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
     # location = next(l for l in multiworld.get_unfilled_locations(player=player) if l.name == "Location Name")
     # item_to_place = next(i for i in item_pool if i.name == "Item Name")
     # location.place_locked_item(item_to_place)
-    # item_pool.remove(item_to_place)
+    # remove_specific_item(item_pool, item_to_place)
 
 # The complete item pool prior to being set for generation is provided here, in case you want to make changes to it
 def after_create_items(item_pool: list, world: World, multiworld: MultiWorld, player: int) -> list:
@@ -348,7 +348,7 @@ def hook_interpret_slot_data(world: World, player: int, slot_data: dict[str, Any
         for col in range(2,7):
             row[col] = bytes(str(world.random.randint(0, 6)), "ascii")
     setup[b"setup\\tracks.csv"] = lists_to_csv(table)
-    write_wad(setup_path, setup)
+    write_wad(Path(sgp_path) / "wads/setup.wad", setup)
     logging.info(f"Patched {setup_path}")
 
     return slot_data
