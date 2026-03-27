@@ -41,9 +41,9 @@ CARS = {
     14: {"name": "Flying Mantis", "group": "Aero Blasters"},
     15: {"name": "Stunt Monkey", "group": "Aero Blasters"},
     16: {"name": "Inferno", "group": "Speed Demons"},
-    17: {"name": "Forkster", "group": "Team Specials"},
-    18: {"name": "Wormsmobile", "group": "Team Specials"},
-    19: {"name": "Formula 17", "group": "Team Specials"},
-    20: {"name": "Team Machine", "group": "Team Specials"},
+    # 17: {"name": "Forkster", "group": "Team Specials"},
+    # 18: {"name": "Wormsmobile", "group": "Team Specials"},
+    # 19: {"name": "Formula 17", "group": "Team Specials"},
+    # 20: {"name": "Team Machine", "group": "Team Specials"},
 }
 SETUP_MD5 = "d3c9afeda52418470db56c2ed2d90a35"
