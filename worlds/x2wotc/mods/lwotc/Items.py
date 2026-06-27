@@ -4,7 +4,7 @@ from worlds.x2wotc.ItemData import X2WOTCItemData, TECH_ITEM_PREFIX, PCS_ITEM_PR
 
 
 # For the full definition of X2WOTCItemData, see worlds/x2wotc/ItemData.py
-lwotc_items: dict[str, X2WOTCItemData] = {
+lwotc_techs: dict[str, X2WOTCItemData] = {
     "LaserWeaponsCompleted": X2WOTCItemData(
         display_name = TECH_ITEM_PREFIX + "Laser Weapons",
         id = get_new_item_id(),
@@ -373,7 +373,7 @@ lwotc_weapon_mod_items: dict[str, X2WOTCItemData] = {
 }
 
 items: dict[str, X2WOTCItemData] = {
-    **lwotc_items,
+    **lwotc_techs,
     **lwotc_pcs_items,
     **lwotc_weapon_mod_items,
 }
