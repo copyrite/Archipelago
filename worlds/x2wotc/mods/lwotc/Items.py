@@ -130,6 +130,18 @@ lwotc_techs: dict[str, X2WOTCItemData] = {
             "AutopsySectopodCompleted",
         ]
     ),
+    "ProgressivePsionicsTechLwotcCompleted": X2WOTCItemData(
+        display_name = TECH_ITEM_PREFIX + "Progressive LW Psionics",
+        id = get_new_item_id(),
+        classification = IC.progression | IC.useful,
+        type = "TechCompleted",
+        tags = {"facility", "weapon", "progressive"},
+        stages = [
+            "PsionicsCompleted",
+            "EleriumCompleted",
+            "AutopsyGatekeeperCompleted",
+        ]
+    ),
     "AutopsyMutonEliteCompleted": X2WOTCItemData(
         display_name = TECH_ITEM_PREFIX + "Muton Elite Autopsy",
         id = get_new_item_id(),
