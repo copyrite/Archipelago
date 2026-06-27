@@ -3,7 +3,6 @@ from BaseClasses import ItemClassification as IC
 from worlds.x2wotc.ItemData import X2WOTCItemData, TECH_ITEM_PREFIX, PCS_ITEM_PREFIX, WEAPON_MOD_ITEM_PREFIX, get_new_item_id
 
 
-# For the full definition of X2WOTCItemData, see worlds/x2wotc/ItemData.py
 lwotc_techs: dict[str, X2WOTCItemData] = {
     "LaserWeaponsCompleted": X2WOTCItemData(
         display_name = TECH_ITEM_PREFIX + "Laser Weapons",
