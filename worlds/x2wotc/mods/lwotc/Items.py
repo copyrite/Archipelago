@@ -51,7 +51,7 @@ lwotc_items: dict[str, X2WOTCItemData] = {
         normal_location = "AdvancedCoilguns"
     ),
     "ProgressiveRifleTechLwotcCompleted": X2WOTCItemData(
-        display_name = TECH_ITEM_PREFIX + "Progressive Rifle (LWOTC)",
+        display_name = TECH_ITEM_PREFIX + "Progressive LW Rifle",
         id = get_new_item_id(),
         classification = IC.progression | IC.useful,
         type = "TechCompleted",
@@ -64,7 +64,7 @@ lwotc_items: dict[str, X2WOTCItemData] = {
         ]
     ),
     "ProgressiveRifleTechLwotcCompleted+": X2WOTCItemData(
-        display_name = TECH_ITEM_PREFIX + "Progressive Rifle+ (LWOTC)",
+        display_name = TECH_ITEM_PREFIX + "Progressive LW Rifle+",
         id = get_new_item_id(),
         classification = IC.progression | IC.useful,
         type = "TechCompleted",
@@ -78,7 +78,7 @@ lwotc_items: dict[str, X2WOTCItemData] = {
         ]
     ),
     "ProgressiveAdvancedWeaponTechLwotcCompleted": X2WOTCItemData(
-        display_name = TECH_ITEM_PREFIX + "Progressive Advanced Weapons (LWOTC)",
+        display_name = TECH_ITEM_PREFIX + "Progressive LW Advanced Weapons",
         id = get_new_item_id(),
         classification = IC.progression | IC.useful,
         type = "TechCompleted",
@@ -90,7 +90,7 @@ lwotc_items: dict[str, X2WOTCItemData] = {
         ]
     ),
     "ProgressiveHeavyArmorTechLwotcCompleted": X2WOTCItemData(
-        display_name = TECH_ITEM_PREFIX + "Progressive Heavy Armor (LWOTC)",
+        display_name = TECH_ITEM_PREFIX + "Progressive Heavy Armor",
         id = get_new_item_id(),
         classification = IC.progression | IC.useful,
         type = "TechCompleted",
@@ -101,7 +101,7 @@ lwotc_items: dict[str, X2WOTCItemData] = {
         ]
     ),
     "ProgressiveLightArmorTechLwotcCompleted": X2WOTCItemData(
-        display_name = TECH_ITEM_PREFIX + "Progressive Light Armor (LWOTC)",
+        display_name = TECH_ITEM_PREFIX + "Progressive Light Armor",
         id = get_new_item_id(),
         classification = IC.progression | IC.useful,
         type = "TechCompleted",
@@ -121,7 +121,7 @@ lwotc_items: dict[str, X2WOTCItemData] = {
         normal_location = "AutopsyDrone"
     ),
     "ProgressiveGREMLINTechLwotcCompleted": X2WOTCItemData(
-        display_name = TECH_ITEM_PREFIX + "Progressive GREMLIN (LWOTC)",
+        display_name = TECH_ITEM_PREFIX + "Progressive LW GREMLIN",
         id = get_new_item_id(),
         classification = IC.progression | IC.useful,
         type = "TechCompleted",
